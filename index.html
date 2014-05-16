@@ -1,0 +1,37 @@
+<center>
+<a href=//github.com/xem/obfuscatweet><img style="position:absolute;top:0;right:0;border:0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>
+<style>
+body { width: 700px; margin: 0 auto; font-family: arial; }
+textarea { width: 700px; height: 200px; border: 2px solid #000; padding: 15px }
+</style>
+<h1>Obfusc-a-tweet</h1>
+<b>Pack up to 190 JS characters / 170 HTML characters in a single, executable tweet.</b>
+<br>
+<br>
+<b>More info <a href="http://xem.github.io/articles/en.html/140chars">here</a></b>
+<br>
+<br>
+<br>
+Source (ASCII):
+<br>
+<textarea id=s></textarea>
+<br>
+<br>
+<br>
+Result (UTF-8):
+<textarea id=r></textarea>
+<br>
+<br>
+<br>
+© 2014 - Maxime Euzière
+</center>
+<script>
+
+// Black magic
+
+compressAscii=function(b,c,a){c="";if(b.length%2)b+=" ";f=String.fromCharCode;for(a=0;b.length>a;a+=2)c+=f(55296+b[e="charCodeAt"](a))+f(56320+b[e](a+1));return c}
+onload=oninput=function(){
+  r.value=(s.value[0]=="<"?"document.write":"eval")+"(unescape(escape('"+compressAscii(s.value)+"').replace(/uD./g,'')))";
+}
+
+</script>
