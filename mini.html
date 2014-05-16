@@ -1,0 +1,1 @@
+<textarea id=t></textarea><script>oninput=function(){b=t.value;c="";if(b.length%2)b+=" ";f=String.fromCharCode;for(a=0;b.length>a;a+=2)c+=f(55296+b[e="charCodeAt"](a))+f(56320+b[e](a+1));t.value=(b[0]=="<"?"document.write":"eval")+"(unescape(escape('"+c+"').replace(/uD./g,'')))"}</script>
