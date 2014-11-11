@@ -2,7 +2,7 @@
 <a href=//github.com/xem/obfuscatweet><img style="position:absolute;top:0;right:0;border:0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>
 <style>
 body { width: 700px; margin: 0 auto; font-family: arial; }
-textarea { width: 700px; height: 200px; border: 2px solid #000; padding: 15px }
+textarea { width: 700px; height: 130px; border: 2px solid #000; padding: 15px }
 </style>
 <center>
 <h1>Obfusc-a-tweet</h1>
@@ -16,16 +16,22 @@ textarea { width: 700px; height: 200px; border: 2px solid #000; padding: 15px }
 <b>- Examples:</b> MiniCodeEditor (<a href="http://xem.github.io/miniCodeEditor/">website</a>, <a href="http://xem.github.io/miniCodeEditor/tweet.html">tweet version</a>), PrettyCode (<a href="http://xem.github.io/prettycode">website</a>, <a href="http://xem.github.io/prettycode/tweet.html">tweet version</a>)
 <br>
 <br>
+- <b>Golfed</b>: <a href=mini.html>251b</a>
 <br>
-Source (ASCII):
+<br>
 <br>
 <center>
+Source (HTML or JS, ASCII):
+<br>
 <textarea id=s></textarea>
 <br>
 <br>
 <br>
-Result (UTF-8):
+Result:
 <textarea id=r></textarea>
+<br>
+<br>
+<b id=l>0</b> chars - <button onclick=location="http://twitter.com?status="+r.value>tweet!</button>
 <br>
 <br>
 <br>
@@ -37,8 +43,15 @@ Result (UTF-8):
 
 compressAscii=function(b,c,a){c="";if(b.length%2)b+=" ";f=String.fromCharCode;for(a=0;b.length>a;a+=2)c+=f(55296+b[e="charCodeAt"](a))+f(56320+b[e](a+1));return c}
 onload=oninput=function(){
-  if(s.value)
-    r.value=(s.value[0]=="<"?"document.write":"eval")+"(unescape(escape('"+compressAscii(s.value)+"').replace(/uD./g,'')))";
+  if(s.value){
+    r.value=s.value[0]=="<"
+    ?"document.write(escape('"+compressAscii(s.value)+"').replace(/%.../g,'\\\\u00'))"
+    :"eval(unescape(escape('"+compressAscii(s.value)+"').replace(/uD./g,'')))";
+    l.innerHTML=
+    s.value[0]=="<"
+    ?((r.value.length-51)/2)+51
+    :((r.value.length-45)/2)+45;
+  }
   else
     r.value="";
 }
