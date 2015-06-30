@@ -45,7 +45,7 @@ compressAscii=function(b,c,a){c="";if(b.length%2)b+=" ";f=String.fromCharCode;fo
 onload=oninput=function(){
   if(s.value){
     r.value=s.value[0]=="<"
-    ?"document.write(escape('"+compressAscii(s.value)+"').replace(/%.../g,'\\\\u00'))"
+    ?"document.write(unescape(escape('"+compressAscii(s.value)+"').replace(/uD./g,'')))"
     :"eval(unescape(escape('"+compressAscii(s.value)+"').replace(/uD./g,'')))";
     l.innerHTML=
     s.value[0]=="<"
