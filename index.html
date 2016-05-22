@@ -38,7 +38,7 @@ Packed:
 compressAscii=function(b,c,a){c="";if(b.length%2)b+=" ";f=String.fromCharCode;for(a=0;b.length>a;a+=2)c+=f(55296+b[e="charCodeAt"](a))+f(56320+b[e](a+1));return c}
 onload=oninput=function(){
   if(s.value){
-    r.value="eval(unescape(escape`"+compressAscii(s.value)+"`.replace(/uD./g,'')))";
+    r.value="eval(unescape(escape`"+compressAscii(s.value)+"`.replace(/u../g,'')))";
     l.innerHTML=((r.value.length-43)/2)+43;
   }
   else
